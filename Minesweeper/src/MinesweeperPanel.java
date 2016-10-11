@@ -6,8 +6,6 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class MinesweeperPanel extends JPanel {
-	Random generator = new Random();
-	Color mine;
 	private static final long serialVersionUID = 3426940946811133635L;
 	private static final int GRID_X = 25;
 	private static final int GRID_Y = 25;
@@ -134,9 +132,5 @@ public class MinesweeperPanel extends JPanel {
 		return y;
 	}
 	
-	public Color getMines(){
-		
-		return mine;
-	}
 	
 }

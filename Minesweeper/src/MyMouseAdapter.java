@@ -84,7 +84,7 @@ public class MyMouseAdapter extends MouseAdapter {
 //			int gridY = myPanel.getGridY(x, y);
 			
 			
-			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridY >= 0) && myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != myPanel.getMines()) {
+			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridY >= 0)) {
 				myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
 			}
 			
