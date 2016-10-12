@@ -87,6 +87,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {
 				myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
 				if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
+					myPanel.showMines();
 					System.out.println("mina");
 				}
 			}

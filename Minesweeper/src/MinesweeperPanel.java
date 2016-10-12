@@ -141,10 +141,20 @@ public class MinesweeperPanel extends JPanel {
 		for(int i = 0; i < 10; i++){
 			int m = generator.nextInt(TOTAL_COLUMNS);
 		    int n = generator.nextInt(TOTAL_ROWS-1);
-			mine = colorArray[m][n] = Color.BLACK;
+			mine = colorArray[m][n];
 			panelValue[m][n] = 1;
 		}
 		
+	}
+	
+	public void showMines(){
+		for(int i = 0; i < TOTAL_COLUMNS; i++){
+			for(int j = 0; j < TOTAL_ROWS-1; j++){
+				if(panelValue[i][j] == 1){
+					colorArray[i][j] = Color.BLACK;
+				}
+			}
+		}
 	}
 }
 
