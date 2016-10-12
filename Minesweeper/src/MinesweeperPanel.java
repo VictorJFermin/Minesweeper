@@ -6,6 +6,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class MinesweeperPanel extends JPanel {
+	public Color mine;
+	public int[][]panelValue= new int [TOTAL_COLUMNS][TOTAL_ROWS];
+	Random generator = new Random();
 	private static final long serialVersionUID = 3426940946811133635L;
 	private static final int GRID_X = 25;
 	private static final int GRID_Y = 25;
@@ -36,10 +39,11 @@ public class MinesweeperPanel extends JPanel {
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //The rest of the grid
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.GRAY;
-				
+				panelValue[x][y] = 0;
 			}
 		}
 		colorArray[0][9] = Color.LIGHT_GRAY;
+		setMines();
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -61,6 +65,7 @@ public class MinesweeperPanel extends JPanel {
 		//By default, the grid will be 10x10 (see above: TOTAL_COLUMNS and TOTAL_ROWS) 
 		g.setColor(Color.BLACK);
 		for (int y = 0; y <= TOTAL_ROWS - 1; y++) {
+			
 			g.drawLine(x1 + GRID_X, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)), x1 + GRID_X + ((INNER_CELL_SIZE + 1) * TOTAL_COLUMNS), y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)));
 		}
 		for (int x = 0; x <= TOTAL_COLUMNS; x++) {
@@ -68,7 +73,7 @@ public class MinesweeperPanel extends JPanel {
 		}
 
 		//Draw an additional cell at the bottom left
-		//g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1);
+	    //g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1);
 
 		//Paint cell colors
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
@@ -131,6 +136,15 @@ public class MinesweeperPanel extends JPanel {
 		}
 		return y;
 	}
-	
-	
+
+	public void setMines(){
+		for(int i = 0; i < 10; i++){
+			int m = generator.nextInt(TOTAL_COLUMNS);
+		    int n = generator.nextInt(TOTAL_ROWS-1);
+			mine = colorArray[m][n] = Color.BLACK;
+			panelValue[m][n] = 1;
+		}
+		
+	}
 }
+

@@ -33,7 +33,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.mouseDownGridY = myPanel.getGridY(x, y);
 			myPanel.repaint();
 			break;
-		case 3:		
+		case 3:		//right mouse button
 			Component r = e.getComponent();
 			while (!(r instanceof JFrame)) {
 				r = r.getParent();
@@ -84,8 +84,11 @@ public class MyMouseAdapter extends MouseAdapter {
 //			int gridY = myPanel.getGridY(x, y);
 			
 			
-			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridY >= 0)) {
+			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {
 				myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
+				if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
+					System.out.println("mina");
+				}
 			}
 			
 //			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
