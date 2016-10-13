@@ -147,6 +147,59 @@ public class MinesweeperPanel extends JPanel {
 		
 	}
 	
+	public int surroundingMines(int m, int n){
+		int mines = 0;
+		if(m == 0 && n == 0){//upper left corner
+			if (panelValue[m+1][n] == 1 || panelValue[m+1][n+1] == 1 || panelValue[m][n+1]==1)
+				 mines = panelValue[m+1][n] + panelValue[m+1][n+1] + panelValue[m][n+1];
+				 return mines;
+		}else if(m == 8 && n == 0){//upper right corner
+			if (panelValue[m-1][n] == 1 || panelValue[m-1][n+1] == 1 || panelValue[m][n+1]==1){
+				mines = panelValue[m-1][n] + panelValue[m-1][n+1] + panelValue[m][n+1];
+				return mines;
+			}
+		}else if(m == 0 && n == 8){//lower left corner
+			if (panelValue[m][n-1] == 1 || panelValue[m+1][n-1] == 1 || panelValue[m+1][n]==1){
+				mines = panelValue[m][n-1] + panelValue[m+1][n-1] + panelValue[m+1][n];
+				return mines;
+			}
+		}else if(m == 8 && n == 8){//upper right corner
+			if (panelValue[m-1][n-1] == 1 || panelValue[m][n-1] == 1 || panelValue[m-1][n]==1){
+				mines = panelValue[m-1][n-1] + panelValue[m][n-1] + panelValue[m-1][n];
+				return mines;
+			}
+		}else if(m > 0 && m < 8 && n == 0){//upper border
+			if (panelValue[m-1][n] == 1 || panelValue[m -1][n+1] == 1 || panelValue[m][n+1]==1 || panelValue[m+1][n+1] == 1 || panelValue[m+1][n]==1){
+				mines = panelValue[m-1][n] + panelValue[m -1][n+1] + panelValue[m][n+1] + panelValue[m+1][n+1] + panelValue[m+1][n];
+				return mines;
+			}
+		}else if(m == 0 && n < 8 && n > 0){//left border
+			if (panelValue[m][n-1] == 1 || panelValue[m +1][n-1] == 1 || panelValue[m+1][n]==1 || panelValue[m+1][n+1] == 1 || panelValue[m][n+1]==1){
+				mines = panelValue[m][n-1] + panelValue[m + 1][n-1] + panelValue[m + 1][n] + panelValue[m+1][n+1] + panelValue[m][n+1];
+				return mines;
+			}
+		}else if(m == 8 && n < 8 && n > 0){//right border
+			if (panelValue[m][n-1] == 1 || panelValue[m-1][n-1] == 1 || panelValue[m-1][n]==1 || panelValue[m-1][n+1] == 1 || panelValue[m][n+1]==1){
+				mines = panelValue[m][n-1] + panelValue[m-1][n-1] + panelValue[m-1][n] + panelValue[m-1][n+1] + panelValue[m][n+1];
+				return mines;
+			}
+		}else if(m > 0 && m < 8 && n == 8){//lower border
+			if (panelValue[m-1][n] == 1 || panelValue[m -1][n-1] == 1 || panelValue[m][n-1]==1 || panelValue[m+1][n-1] == 1 || panelValue[m+1][n]==1){
+				mines = panelValue[m-1][n] + panelValue[m -1][n-1] + panelValue[m][n-1] + panelValue[m+1][n-1] + panelValue[m+1][n];
+				return mines;
+			}
+		}else{ //rest of the grid
+			if (panelValue[m-1][n-1] == 1 || panelValue[m][n-1] == 1 || panelValue[m+1][n-1]==1 || panelValue[m+1][n] == 1 || panelValue[m+1][n+1]==1
+			   || panelValue[m][n+1] == 1 || panelValue[m -1][n+1] == 1 || panelValue[m-1][n]==1){
+			   mines = panelValue[m-1][n-1] + panelValue[m][n-1] + panelValue[m+1][n-1] + panelValue[m+1][n] + panelValue[m+1][n+1] +
+					   panelValue[m][n+1] + panelValue[m -1][n+1] + panelValue[m-1][n];
+			   return mines;
+			}
+			
+		}
+		return 0;
+	}
+	
 	public void showMines(){
 		for(int i = 0; i < TOTAL_COLUMNS; i++){
 			for(int j = 0; j < TOTAL_ROWS-1; j++){
@@ -155,18 +208,6 @@ public class MinesweeperPanel extends JPanel {
 				}
 			}
 		}
-	}
-
-	
-	public void showPanels(int m, int n){
-		
-		colorArray[m][n] = Color.WHITE;
-		if (panelValue[m + 1][n + 1] == 1 || panelValue[m - 1][n - 1] == 1 || panelValue[m][n-1] == 1 || panelValue[m+1][n-1] == 1
-			|| panelValue[m+1][n] == 1 || panelValue[m][n+1] == 1 || panelValue[m-1][n] == 1 || panelValue[m-1][n+1] == 1 || m > 8 ||n > 8)
-			return;
-		
-		showPanels(m+1,n+1);
-		
 	}
 }
 	

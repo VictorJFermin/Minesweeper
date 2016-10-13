@@ -84,13 +84,16 @@ public class MyMouseAdapter extends MouseAdapter {
 //			int gridY = myPanel.getGridY(x, y);
 			
 			
-			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {						
-				myPanel.showPanels(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
+			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {							
+				myPanel.surroundingMines(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
+				System.out.println(myPanel.surroundingMines(myPanel.mouseDownGridX,myPanel.mouseDownGridY));
 				//myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
-				if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
-					myPanel.showMines();
-					System.out.println("mina");
-				}
+//				if (myPanel.isAMine(myPanel.mouseDownGridX, myPanel.mouseDownGridY)== true) {
+//					myPanel.showMines();
+//					System.out.println("mina");
+//				}
+			}else if((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)){
+				
 			}
 			
 //			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
