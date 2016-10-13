@@ -84,8 +84,9 @@ public class MyMouseAdapter extends MouseAdapter {
 //			int gridY = myPanel.getGridY(x, y);
 			
 			
-			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {
-				myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
+			if ((myPanel.mouseDownGridX >= 0) && (myPanel.mouseDownGridX < 9) && (myPanel.mouseDownGridY >= 0) && (myPanel.mouseDownGridY < 9)) {						
+				myPanel.showPanels(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
+				//myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;
 				if (myPanel.panelValue[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) {
 					myPanel.showMines();
 					System.out.println("mina");
@@ -155,11 +156,13 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel1.y = y3;
 //			int gridX1 = myPanel1.getGridX(x3, y3);
 //			int gridY1 = myPanel1.getGridY(x3, y3);
-			if ((myPanel1.mouseDownGridX == -1) || (myPanel1.mouseDownGridY == -1) || (myPanel1.mouseDownGridX == 0) && (myPanel1.mouseDownGridY == 9)) {
-				//Had pressed outside
-				//Do nothing
-			}else{
+			if ((myPanel1.mouseDownGridX >= 0) && (myPanel1.mouseDownGridY < 9) && (myPanel1.mouseDownGridY >= 0) && (myPanel1.mouseDownGridY < 9)) {
 				myPanel1.colorArray[myPanel1.mouseDownGridX][myPanel1.mouseDownGridY] = Color.RED;
+				if(myPanel1.panelValue[myPanel1.mouseDownGridX][myPanel1.mouseDownGridY] == 1){
+					System.out.println("Has tapado una mina");
+				}
+			}else{
+				
 			}
 			myPanel1.repaint();
 			break;
@@ -167,5 +170,8 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
+		
 	}
+
 }
+	

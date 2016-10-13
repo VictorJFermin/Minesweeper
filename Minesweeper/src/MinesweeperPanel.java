@@ -141,7 +141,7 @@ public class MinesweeperPanel extends JPanel {
 		for(int i = 0; i < 10; i++){
 			int m = generator.nextInt(TOTAL_COLUMNS);
 		    int n = generator.nextInt(TOTAL_ROWS-1);
-			mine = colorArray[m][n];
+			mine = colorArray[m][n] = Color.BLACK;
 			panelValue[m][n] = 1;
 		}
 		
@@ -156,5 +156,20 @@ public class MinesweeperPanel extends JPanel {
 			}
 		}
 	}
+
+	
+	public void showPanels(int m, int n){
+		
+		colorArray[m][n] = Color.WHITE;
+		if (panelValue[m + 1][n + 1] == 1 || panelValue[m - 1][n - 1] == 1 || panelValue[m][n-1] == 1 || panelValue[m+1][n-1] == 1
+			|| panelValue[m+1][n] == 1 || panelValue[m][n+1] == 1 || panelValue[m-1][n] == 1 || panelValue[m-1][n+1] == 1 || m > 8 ||n > 8)
+			return;
+		
+		showPanels(m+1,n+1);
+		
+	}
 }
+	
+	
+
 
