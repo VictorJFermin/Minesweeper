@@ -19,6 +19,8 @@ public class MinesweeperPanel extends JPanel {
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
+	public int mouseDownGridXr = 0;
+	public int mouseDownGridYr = 0;
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public MinesweeperPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
@@ -30,13 +32,8 @@ public class MinesweeperPanel extends JPanel {
 		if (TOTAL_ROWS + (new Random()).nextInt(1) < 3) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("TOTAL_ROWS must be at least 3!");
 		}
-//		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //Top row
-//			colorArray[x][0] = Color.BLUE;
-//		}
-//		for (int y = 0; y < TOTAL_ROWS; y++) {   //Left column
-//			colorArray[0][y] = Color.LIGHT_GRAY;
-//		}
-		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //The rest of the grid
+		
+		for (int x = 0; x < TOTAL_COLUMNS; x++) {   
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.GRAY;
 				panelValue[x][y] = 0;
@@ -72,9 +69,6 @@ public class MinesweeperPanel extends JPanel {
 			g.drawLine(x1  + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 +1+ GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)));
 		}
 
-		//Draw an additional cell at the bottom left
-	    //g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1);
-
 		//Paint cell colors
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
@@ -85,6 +79,9 @@ public class MinesweeperPanel extends JPanel {
 				}
 			}
 		}
+		
+		g.setColor(Color.RED);
+		g.drawString(String.valueOf(surroundingMines(mouseDownGridX, mouseDownGridY)), (mouseDownGridX+1) * ((INNER_CELL_SIZE+2)) , (mouseDownGridY+1) *  (29));
 	}
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
@@ -141,7 +138,7 @@ public class MinesweeperPanel extends JPanel {
 		for(int i = 0; i < 10; i++){
 			int m = generator.nextInt(TOTAL_COLUMNS);
 		    int n = generator.nextInt(TOTAL_ROWS-1);
-			mine = colorArray[m][n] = Color.BLACK;
+			mine = colorArray[m][n];
 			panelValue[m][n] = 1;
 		}
 		
@@ -188,7 +185,7 @@ public class MinesweeperPanel extends JPanel {
 				mines = panelValue[m-1][n] + panelValue[m -1][n-1] + panelValue[m][n-1] + panelValue[m+1][n-1] + panelValue[m+1][n];
 				return mines;
 			}
-		}else{ //rest of the grid
+		}else if(m > 0 && m < 8 && n > 0 && n < 8){ //rest of the grid
 			if (panelValue[m-1][n-1] == 1 || panelValue[m][n-1] == 1 || panelValue[m+1][n-1]==1 || panelValue[m+1][n] == 1 || panelValue[m+1][n+1]==1
 			   || panelValue[m][n+1] == 1 || panelValue[m -1][n+1] == 1 || panelValue[m-1][n]==1){
 			   mines = panelValue[m-1][n-1] + panelValue[m][n-1] + panelValue[m+1][n-1] + panelValue[m+1][n] + panelValue[m+1][n+1] +
@@ -209,6 +206,7 @@ public class MinesweeperPanel extends JPanel {
 			}
 		}
 	}
+	
 }
 	
 	
